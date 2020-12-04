@@ -29,7 +29,7 @@ a Golang tool for redirecting HTTP requests
 
   ```
   http://a.example.com/ -> http://b.example.com/
-  http://a.example.com/aaa -> http://b.example.com/bbb
+  http://a.example.com/aaa -> http://b.example.com/aaa
   ```
 
 * When `REDIRECT_TARGET=http://b.example.com/ccc/` and `REDIRECT_PREFIX=/aaa`
