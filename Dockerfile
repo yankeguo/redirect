@@ -6,3 +6,4 @@ RUN go build -o /redirect
 
 FROM scratch
 COPY --from=builder /redirect /redirect
+CMD ["/redirect"]
