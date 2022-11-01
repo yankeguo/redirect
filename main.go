@@ -52,9 +52,9 @@ func main() {
 	envPermanent, _ = strconv.ParseBool(strings.TrimSpace(os.Getenv("REDIRECT_PERMANENT")))
 	envVerbose, _ = strconv.ParseBool(strings.TrimSpace(os.Getenv("REDIRECT_VERBOSE")))
 
-	redirectCode := http.StatusTemporaryRedirect
+	code := http.StatusFound
 	if envPermanent {
-		redirectCode = http.StatusPermanentRedirect
+		code = http.StatusPermanentRedirect
 	}
 
 	m := http.NewServeMux()
@@ -74,16 +74,16 @@ func main() {
 			}
 			newURL := envTarget + strings.TrimPrefix(u.String(), "/")
 			if envVerbose {
-				log.Println(req.Method, req.URL.String(), redirectCode, newURL)
+				log.Println(req.Method, req.URL.String(), code, newURL)
 			}
-			http.Redirect(rw, req, newURL, redirectCode)
+			http.Redirect(rw, req, newURL, code)
 		})
 	} else {
 		m.HandleFunc("/", func(rw http.ResponseWriter, req *http.Request) {
 			if envVerbose {
-				log.Println(req.Method, req.URL.String(), redirectCode, envTarget)
+				log.Println(req.Method, req.URL.String(), code, envTarget)
 			}
-			http.Redirect(rw, req, envTarget, redirectCode)
+			http.Redirect(rw, req, envTarget, code)
 		})
 	}
 
