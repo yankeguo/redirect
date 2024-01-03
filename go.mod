@@ -1,4 +1,4 @@
-module github.com/guoyk93/redirect
+module github.com/yankeguo/redirect
 
 go 1.19
 
